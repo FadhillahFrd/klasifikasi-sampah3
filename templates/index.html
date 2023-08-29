@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Dashboard - EcoVision</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic&amp;display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/fonts/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/aos.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/baguetteBox.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/Bootstrap-Image-Uploader.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/Drag--Drop-Upload-Form-1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/Drag--Drop-Upload-Form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/Drag-Drop-File-Input-Upload.css') }}">
+</head>
+
+<style>
+    .header-image {
+        background-image: url("{{ url_for('static', filename='assets/img/website2.jpg') }}");
+    }
+</style>
+
+<body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="57">
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav" style="background-color: rgba(0, 0, 0, 0.4);">
+        <div class="container"><a class="navbar-brand" href="#page-top">ECOVISION</a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-align-justify" ></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive" >
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#tentang">TENTANG</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#klasifikasi">KLASIFIKASI</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#kontak">KONTAK</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav> 
+    
+    <header class="header-image text-center text-white d-flex masthead">
+        <div class="container my-auto">
+            <div class="card bordered col-lg-8 mx-auto" style="background-color: rgba(0, 0, 0, 0.3);">
+                <div class="row">
+                    <div class="col-lg-10 mx-auto">
+                        <h1 class="text-uppercase"><strong>SELAMAT DATANG</strong></h1>
+                        <hr>
+                    </div>
+                </div>
+                <div class="col-lg-8 mx-auto p-3">
+                    <p class="text-faded mb-5"><span style="color: rgb(255, 255, 255);">Silahkan upload gambar anda untuk menentukan apakah tergolong sampah organik atau daur ulang.</span></p><a class="btn btn-primary btn-xl" role="button" href="#klasifikasi">Try Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="tentang" class="bg-primary">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-lg-8 text-center mx-auto">
+                    <h2 class="text-white section-heading">Apakah dapat di daur ulang ???</h2>
+                    <hr class="light my-4">
+                    <p class="text-faded mb-4">ECOVISION merupakan sebuah website yang berfungsi 
+                        untuk melakukan klasifisikasi gambar dan memiliki output untuk 
+                        mengkategorikan apakah gambar yang anda input termasuk 
+                        kedalam sampah daur ulang atau organik. Tahap awal untuk melakukan 
+                        pengkategorian sampah ini dibuat untuk mendukung pemerintah dalam 
+                        mewujudkan Indonesia yang bebas sampah, karena setelah tahap ini dilakukan 
+                        Masyarakat diharapkan mampu untuk membuang sampah sesuai kategorinya untuk
+                         di kelola secara lebih lanjut.</p>
+                         <a class="btn btn-light btn-xl" role="button" href="#klasifikasi">MULAI</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="klasifikasi">
+	<div class="container">
+		<div class="row">
+            <div class="col-lg-12 col-xl-12 text-center">
+                <h2 class="section-heading">Silahkan Upload Gambar Disini !</h2>
+                <hr class="my-4">
+            </div>
+			<div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="flex shadow p-3 mb-5 bg-white rounded">
+                            <div class="card" style="border-color:#000000">
+                                <div class="card-header" >
+                                <h4>Upload Gambar</h4> 
+                                </div>
+                                <div class="card-body " style="border-color:#000000">
+                                    <form method="post" action="/prediction" enctype="multipart/form-data">
+                                        <dl>
+                                            <p>
+                                                <input type="file" name="file" autocomplete="off" required onchange="loadFile(event)">
+                                            </p>
+                                        </dl>
+                                        <p><img id="output" width="200" /></p>
+                                        <p>
+                                            <input type="submit" value="Submit">
+                                        </p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="flex shadow p-3 mb-5 bg-white rounded">
+                            <div id="results">
+                                <h5
+                                    style="background-color: #F05F40; text-align: center; font-family:sans-serif; color:white; padding-top: 30px; padding-bottom: 30px;">
+                                    <span>
+                                        {% with messages = get_flashed_messages() %}
+                                        {% if messages %}
+                                        Waste Category: {{ messages[0] }}
+                                        <br>
+                                        <img src="{{ url_for('static', filename=messages[2])}}" height="50%" class="mt-4 mb-4"
+                                        width="40%">
+                                        <br>
+                                        Probability: {{ messages[1] }}
+                                        {% endif %}
+                                        {% endwith %}
+                                    </span>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <script>
+                    var loadFile = function (event) {
+                        var image = document.getElementById('output');
+                        image.src = URL.createObjectURL(event.target.files[0]);
+        
+                    };
+                </script>
+            </div>
+
+            <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        </div>
+    </div>                     
+    </section>
+
+    <section id="kontak">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 text-center mx-auto">
+                    <h2 class="section-heading">Beri tahu kami apa yang Anda pikirkan?</h2>
+                    <hr class="my-4">
+                    <p class="mb-5">Kami selalu terbuka untuk menerima kritik dan saran yang membangun dari Anda. Jangan ragu untuk menghubungi kami melalui informasi kontak di bawah ini :</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 text-center ms-auto"><i class="fa fa-phone fa-3x mb-3 sr-contact"></i>
+                    <p>(+62)85771152002</p>
+                </div>
+                <div class="col-lg-4 text-center me-auto"><i class="fa fa-envelope fa-3x mb-3 sr-contact"></i>
+                    <p><a href="mailto:your-email@your-domain.com">fadhillahfarid706@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='assets/bootstrap/js/bootstrap.min.js') }}"></script>
+
+    
+</body>
+
+</html>
